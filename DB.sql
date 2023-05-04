@@ -44,7 +44,7 @@ CREATE TABLE Prenotazioni(
 	impianto_scelto varchar(30) not null,
 	numero_partecipanti int not null,
 	lezione_associata varchar(30) not null
-
+	FOREIGN KEY (username) REFERENCES Utenti(username)
 );
 
 CREATE TABLE Wallet(
