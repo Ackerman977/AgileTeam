@@ -38,12 +38,13 @@ CREATE TABLE Lezioni(
 );
 
 CREATE TABLE Prenotazioni(
+        username varchar(100) not null UNIQUE,
 	data_prenotazione date not null,
 	orario_prenotazione datetime not null,
-	tipologia sport varchar(30) not null,
+	tipologia_sport varchar(30) not null,
 	impianto_scelto varchar(30) not null,
 	numero_partecipanti int not null,
-	lezione_associata varchar(30) not null
+	lezione_associata varchar(30) not null,
 	FOREIGN KEY (username) REFERENCES Utenti(username)
 );
 
