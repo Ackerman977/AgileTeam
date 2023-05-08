@@ -41,91 +41,15 @@
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
                         </button>
                     </form>
-                    <form class="d-flex">
-                        <form action="login.php" method="POST">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Login
-
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="email" required><br>
-
-                            <label for="password">Password:</label>
-                            <input type="password" id="password" name="password" required><br>
-                            
-                            <input type="submit" value="invia">
-                           <!-- <p>Non hai ancora un account? <a href="index.html">Registrati</a></p>-->
-                            <!--<span class="badge bg-dark text-white ms-1 rounded-pill">0</span>-->
-                        </button>
-                        </form>
-                    </form>
-                    <!-- Form di registrazione -->
-                        <!-- Form di registrazione -->
-                    
-                    <form action="registration.php" method="POST">
-                        <button onclick="openSignupModal()">Registrati</button>
-
-                        <!-- Modale di registrazione -->
-                        <div id="signupModal" class="modal" style="display:none;">
-                            <form action="registration.php" method="POST">
-                                <label for="name">Nome:</label>
-                                <input type="text" id="name" name="name" required><br>
-
-                                <label for="surname">Cognome:</label>
-                                <input type="text" id="surname" name="surname" required><br>
-
-                                <label for="email">Email:</label>
-                                <input type="email" id="email" name="email" required><br>
-
-                                <label for="password">Password:</label>
-                                <input type="password" id="password" name="password" required><br>
-
-                                <button type="submit">Registrati</button>
-                            </form>
-                        </div>
-                    </form>
-
-<!-- Script per aprire la modale di registrazione -->
-<script>
-    function openSignupModal() {
-        document.getElementById("signupModal").style.display = "block";
-    }
-</script>
-<form class="ms-3"></form>
-
-                    <!-- Script per aprire la modale di registrazione -->
-                    <script>
-                        function openSignupModal() {
-                            document.getElementById("signupModal").style.display = "block";
-                        }
-                    </script>
-
-                    <style>
-                    .modal {
-                    display: none; /* nasconde la finestra modale di default */
-                    position: fixed; /* posiziona la finestra modale in alto */
-                    z-index: 1; /* rende la finestra modale visibile sopra il contenuto */
-                    left: 0;
-                    top: 0;
-                    width: 100%;
-                    height: 100%;
-                    overflow: auto; /* consente lo scorrimento quando il contenuto è più lungo della finestra modale */
-                    background-color: rgba(0,0,0,0.4); /* opacità per lo sfondo */
-                    }
-
-                    .modal form {
-                    background-color: #fefefe;
-                    margin: 10% auto; /* 10% dall'alto e centrato orizzontalmente */
-                    padding: 20px;
-                    border: 1px solid #888;
-                    width: 80%; /* larghezza della finestra modale */
-                    }
-                    </style>
-                    
-
-                                    </div>
-                                </div>
-                            </nav>
+                    <a href="login.html" class="btn btn-outline-dark ms-3">
+                        Login
+                    </a>
+                    <a href="register.html" class="btn btn-outline-dark ms-3">
+                        Registrazione
+                    </a>
+                </div>
+            </div>
+        </nav>
         <!-- Header-->
         <header class="bg-dark py-5">
             <div class="container px-4 px-lg-5 my-5">
