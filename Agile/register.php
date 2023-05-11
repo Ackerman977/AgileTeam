@@ -1,64 +1,62 @@
 <?php
-
 require_once('connection.php');
 
 if (isset($_POST['register'])) {
+    $nome = $_POST['nome'] ?? '';
+    $cognome = $_POST['cognome'] ?? '';
+    $numero_telefono = $_POST['numero_telefono'] ?? '';
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
-    $isUsernameValid = filter_var(
-        $username,
-        FILTER_VALIDATE_REGEXP, [
-            "options" => [
-                "regexp" => "/^[a-z\d_]{3,20}$/i"
-            ]
-        ]
-    );
-    $pwdLenght = mb_strlen($password);
-    
-    if (empty($username) || empty($password)) {
-        $msg = 'Compila tutti i campi %s';
-    } elseif (false === $isUsernameValid) {
-        $msg = 'Lo username non è valido. Sono ammessi solamente caratteri 
-                alfanumerici e l\'underscore. Lunghezza minina 3 caratteri.
-                Lunghezza massima 20 caratteri';
-    } elseif ($pwdLenght < 8 || $pwdLenght > 20) {
-        $msg = 'Lunghezza minima password 8 caratteri.
-                Lunghezza massima 20 caratteri';
-    } else {
-        $password_hash = password_hash($password, PASSWORD_BCRYPT);
+    $email = $_POST['email'] ?? '';
 
-        $query = "
-            SELECT id
-            FROM users
-            WHERE username = :username
-        ";
-        
-        $check = $pdo->prepare($query);
-        $check->bindParam(':username', $username, PDO::PARAM_STR);
-        $check->execute();
-        
-        $user = $check->fetchAll(PDO::FETCH_ASSOC);
-        
-        if (count($user) > 0) {
-            $msg = 'Username già in uso %s';
+    $query = "SELECT id FROM utenti1 WHERE nome = :nome OR email = :email OR username = :username";
+    $check = $pdo->prepare($query);
+    $check->bindParam(':nome', $nome, PDO::PARAM_STR);
+    $check->bindParam(':email', $email, PDO::PARAM_STR);
+    $check->bindParam(':username', $username, PDO::PARAM_STR);
+    $check->execute();
+    $existingUsers = $check->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($existingUsers) > 0) {
+        $msg = 'Name, email, or username already in use: %s';
+    } elseif (trim($nome) === '') {
+        $msg = 'The "Nome" field is required: %s';
+    } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $msg = 'Please enter a valid email address: %s';
+    } elseif (!preg_match("/^[a-z\d_]{3,20}$/i", $username)) {
+        $msg = 'The username is not valid. Only alphanumeric characters and underscore are allowed. Minimum length: 3 characters. Maximum length: 20 characters: %s';
+    } elseif (strlen($password) < 8 || strlen($password) > 20) {
+        $msg = 'Password length should be between 8 and 20 characters: %s';
+    } else {
+        $query = "SELECT id FROM utenti1 WHERE email = :email";
+        $checkEmail = $pdo->prepare($query);
+        $checkEmail->bindParam(':email', $email, PDO::PARAM_STR);
+        $checkEmail->execute();
+        $existingEmail = $checkEmail->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($existingEmail) > 0) {
+            $msg = 'The email is already in use: %s';
         } else {
-            $query = "
-                INSERT INTO users
-                VALUES (0, :username, :password)
-            ";
-        
-            $check = $pdo->prepare($query);
-            $check->bindParam(':username', $username, PDO::PARAM_STR);
-            $check->bindParam(':password', $password_hash, PDO::PARAM_STR);
-            $check->execute();
-            
-            if ($check->rowCount() > 0) {
-                $msg = 'Registrazione eseguita con successo';
+            $password_hash = password_hash($password, PASSWORD_BCRYPT);
+
+            $query = "INSERT INTO utenti1 (nome, cognome, numero_telefono, username, password, email) VALUES (:nome, :cognome, :numero_telefono, :username, :password, :email)";
+            $registerUser = $pdo->prepare($query);
+            $registerUser->bindParam(':nome', $nome, PDO::PARAM_STR);
+            $registerUser->bindParam(':cognome', $cognome, PDO::PARAM_STR);
+            $registerUser->bindParam(':numero_telefono', $numero_telefono, PDO::PARAM_STR);
+            $registerUser->bindParam(':username', $username, PDO::PARAM_STR);
+            $registerUser->bindParam(':password', $password_hash, PDO::PARAM_STR);
+            $registerUser->bindParam(':email', $email, PDO::PARAM_STR);
+            $registerUser->execute();
+
+            if ($registerUser->rowCount() > 0) {
+                $msg = 'Registration successful';
             } else {
-                $msg = 'Problemi con l\'inserimento dei dati %s';
+                $msg = 'Problems inserting data: %s';
             }
         }
     }
-    
-    printf($msg, '<a href="Registrazione.html">torna indietro</a>');
+    if (isset($msg)) {
+        echo sprintf($msg, '<a href="register.html">Go back</a>');
+    }
 }
