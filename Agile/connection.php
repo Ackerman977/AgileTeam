@@ -1,16 +1,21 @@
 <?php
-// Database configuration
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "agile_db";
+$config = [
+    'db_engine' => 'mysql',
+    'db_host' => '127.0.0.1',
+    'db_name' => 'agile_db',
+    'db_user' => 'root',
+    'db_password' => '',
+];
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$db_config = $config['db_engine'] . ":host=".$config['db_host'] . ";dbname=" . $config['db_name'];
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connessione al database fallita: " . $conn->error);
-} 
-echo "Connessione al database stabilita con successo";
-?>
+try {
+    $pdo = new PDO($db_config, $config['db_user'], $config['db_password'], [
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+    ]);
+        
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+} catch (PDOException $e) {
+    exit("Impossibile connettersi al database: " . $e->getMessage());
+}

@@ -1,31 +1,42 @@
 <?php
-
+session_start();
 require_once('connection.php');
 
+if (isset($_SESSION['session_id'])) {
+    header('Location: dashboard.php');
+    exit;
+}
 
-$email = $conn->real_escape_string($_POST['email']);
-$password = $conn->real_escape_string($_POST['password']);
-
-if($_SERVER["REQUEST_METHOD"] === "POST"){
-
-$sql_select ="SELECT * FROM users WHERE email = '$email";
-if($result = $conn->query($sql_select)){
-    if($result->num_rows == 1){
-        $row = $result->fetch_array(MYSQLI_ASSOC);
-        if(password_verify($password, $row['password'])){
-            session_start();
+if (isset($_POST['login'])) {
+    $username = $_POST['username'] ?? '';
+    $password = $_POST['password'] ?? '';
+    
+    if (empty($username) || empty($password)) {
+        $msg = 'Inserisci username e password %s';
+    } else {
+        $query = "
+            SELECT username, password
+            FROM users
+            WHERE username = :username
+        ";
+        
+        $check = $pdo->prepare($query);
+        $check->bindParam(':username', $username, PDO::PARAM_STR);
+        $check->execute();
+        
+        $user = $check->fetch(PDO::FETCH_ASSOC);
+        
+        if (!$user || password_verify($password, $user['password']) === false) {
+            $msg = 'Credenziali utente errate %s';
+        } else {
+            session_regenerate_id();
+            $_SESSION['session_id'] = session_id();
+            $_SESSION['session_user'] = $user['username'];
             
-            $_SESSION['loggato'] = true;
-            $_SESSION['name'] = $row['name'];
-            $_SESSION['email'] = $row['email'];
-
-            header("location: are_privata.php");
-        }else{
-            echo "la password non è corretta";
+            header('Location: dashboard.php');
+            exit;
         }
-    }else{
-        echo "non ci sono account con quello username";
     }
-    }
-    $conn->close();
+    
+    printf($msg, '<a href="login.html">torna indietro</a>');
 }
