@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
 -- Creato il: Mag 11, 2023 alle 11:02
+=======
+-- Creato il: Mag 11, 2023 alle 10:44
+>>>>>>> 58f3e927cbd32218eeea61cd8a9b78be608e1429
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -168,8 +172,12 @@ ALTER TABLE `maestri`
 ALTER TABLE `prenotazioni`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `impianto` (`impianto`),
+<<<<<<< HEAD
   ADD KEY `maestro` (`maestro`),
   ADD KEY `prenotazioni_ibfk_3` (`utente`);
+=======
+  ADD KEY `maestro` (`maestro`);
+>>>>>>> 58f3e927cbd32218eeea61cd8a9b78be608e1429
 
 --
 -- Indici per le tabelle `utenti`
@@ -182,8 +190,12 @@ ALTER TABLE `utenti`
 --
 ALTER TABLE `wallet`
   ADD PRIMARY KEY (`ID`),
+<<<<<<< HEAD
   ADD KEY `prenotazione` (`prenotazione`),
   ADD KEY `wallet_ibfk_1` (`utente`);
+=======
+  ADD KEY `prenotazione` (`prenotazione`);
+>>>>>>> 58f3e927cbd32218eeea61cd8a9b78be608e1429
 
 --
 -- AUTO_INCREMENT per le tabelle scaricate
@@ -235,13 +247,21 @@ ALTER TABLE `maestri`
 ALTER TABLE `prenotazioni`
   ADD CONSTRAINT `prenotazioni_ibfk_1` FOREIGN KEY (`impianto`) REFERENCES `impianti` (`ID`),
   ADD CONSTRAINT `prenotazioni_ibfk_2` FOREIGN KEY (`maestro`) REFERENCES `maestri` (`ID`),
+<<<<<<< HEAD
   ADD CONSTRAINT `prenotazioni_ibfk_3` FOREIGN KEY (`utente`) REFERENCES `utenti` (`id`);
+=======
+  ADD CONSTRAINT `prenotazioni_ibfk_3` FOREIGN KEY (`utente`) REFERENCES `utenti` (`ID`);
+>>>>>>> 58f3e927cbd32218eeea61cd8a9b78be608e1429
 
 --
 -- Limiti per la tabella `wallet`
 --
 ALTER TABLE `wallet`
+<<<<<<< HEAD
   ADD CONSTRAINT `wallet_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utenti` (`id`),
+=======
+  ADD CONSTRAINT `wallet_ibfk_1` FOREIGN KEY (`utente`) REFERENCES `utenti` (`ID`),
+>>>>>>> 58f3e927cbd32218eeea61cd8a9b78be608e1429
   ADD CONSTRAINT `wallet_ibfk_2` FOREIGN KEY (`prenotazione`) REFERENCES `prenotazioni` (`ID`);
 COMMIT;
 
