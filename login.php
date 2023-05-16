@@ -47,10 +47,5 @@ if (isset($_POST['login'])) {
     }    
 }
 printf($msg, '<a href="index.html">torna indietro</a>');
+?>
 
-<<<<<<< HEAD
-?>
-=======
-echo "benvenuto";
-?>
->>>>>>> 4a081ac7edbdedd8ceecca231aa558200e780698
