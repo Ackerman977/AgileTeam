@@ -6,5 +6,5 @@ session_start();
 session_destroy();
 
 // reindirizza l'utente alla pagina di login
-header('Location: login.html');
+header('index.html');
 exit;

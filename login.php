@@ -6,7 +6,7 @@ require_once('connection.php');
 
 // se l'utente è già loggato, reindirizzalo alla dashboard
 if (isset($_SESSION['session_id'])) {
-    header('Location: dashboard.php');
+    header('dashboard.php');
     exit;
 }
 
@@ -21,11 +21,7 @@ if (isset($_POST['login'])) {
         $msg = 'Inserisci username e password %s';
     } else {
         // prepara una query SELECT per recuperare le informazioni dell'utente
-        $query = "
-            SELECT username, password
-            FROM users
-            WHERE username = :username
-        ";
+        $query = "SELECT username, password FROM utenti WHERE username = :username";
         
         // esegui la query con l'username fornito
         $check = $pdo->prepare($query);
@@ -48,7 +44,8 @@ if (isset($_POST['login'])) {
             header('Location: dashboard.php');
             exit;
         }
-    }
-    
-    printf($msg, '<a href="login.html">torna indietro</a>');
+    }    
 }
+printf($msg, '<a href="index.html">torna indietro</a>');
+
+?>
