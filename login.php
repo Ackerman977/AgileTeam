@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
         // prepara una query SELECT per recuperare le informazioni dell'utente
         $query = "
             SELECT username, password
-            FROM users
+            FROM utenti
             WHERE username = :username
         ";
         
