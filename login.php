@@ -49,6 +49,8 @@ if (isset($_POST['login'])) {
             exit;
         }
     }
-    
-    printf($msg, '<a href="login.html">torna indietro</a>');
 }
+printf($msg, '<a href="login.html">torna indietro</a>');
+
+echo "benvenuto";
+?>
