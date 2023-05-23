@@ -9,6 +9,10 @@ if (isset($_POST['register'])) {
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
     $email = $_POST['email'] ?? '';
+    $socio = isset($_POST['socio']) ? 1 : 0;
+    $socioPlus = isset($_POST['socioPlus']) ? 1 : 0;
+    $tipoAbbonamento = $_POST['tipoAbbonamento'] ?? '';
+
 
     $query = "SELECT id FROM utenti WHERE nome = :nome OR email = :email OR username = :username";
     $check = $pdo->prepare($query);
@@ -40,7 +44,7 @@ if (isset($_POST['register'])) {
         } else {
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-            $query = "INSERT INTO utenti (nome, cognome, numero_telefono, username, password, email) VALUES (:nome, :cognome, :numero_telefono, :username, :password, :email)";
+            $query = "INSERT INTO utenti (nome, cognome, numero_telefono, username, password, email, socio, socio_plus, tipo_abbonamento) VALUES (:nome, :cognome, :numero_telefono, :username, :password, :email, :socio, :socio_plus, :tipo_abbonamento)";
             $registerUser = $pdo->prepare($query);
             $registerUser->bindParam(':nome', $nome, PDO::PARAM_STR);
             $registerUser->bindParam(':cognome', $cognome, PDO::PARAM_STR);
@@ -48,16 +52,34 @@ if (isset($_POST['register'])) {
             $registerUser->bindParam(':username', $username, PDO::PARAM_STR);
             $registerUser->bindParam(':password', $password_hash, PDO::PARAM_STR);
             $registerUser->bindParam(':email', $email, PDO::PARAM_STR);
+            $registerUser->bindParam(':socio', $socio, PDO::PARAM_INT);
+            $registerUser->bindParam(':socio_plus', $socioPlus, PDO::PARAM_INT);
+            $registerUser->bindParam(':tipo_abbonamento', $tipoAbbonamento, PDO::PARAM_STR);            
             $registerUser->execute();
 
-            if ($registerUser->rowCount() > 0) {
-                $msg = 'Registration successful';
+            if (isset($msg)) {
+                $registrationMessage = sprintf($msg, '<a href="index.html">Go back</a>');
+                $indexURL = 'index.html';
+            }
+
+
+            /* if ($registerUser->rowCount() > 0) {
+                echo '<script>';
+                echo 'alert("' . sprintf($msg, 'Registration successful') . '");';
+                echo 'window.location.href = "index.html";';
+                echo '</script>';
+            }   */  
+
+
+            /* if ($registerUser->rowCount() > 0) {
+                $msg = 'Registration successful'; 
             } else {
                 $msg = 'Problems inserting data: %s';
-            }
+            } */
         }
     }
-    if (isset($msg)) {
+   /*  if (isset($msg)) {
         echo sprintf($msg, '<a href="index.html">Go back</a>');
-    }
+    } */
 }
+?>

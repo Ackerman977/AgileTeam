@@ -74,7 +74,7 @@
                     </div>
                     <!-- Product actions -->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Visualizza impianto</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
                     </div>
                 </div>
             </div>
@@ -193,12 +193,35 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                     </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="socio" name="socio" onclick="handleSocioCheckbox()">
+                        <label class="form-check-label" for="socio">Diventa socio</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="socioPlus" name="socioPlus" onclick="handleSocioPlusCheckbox()">
+                        <label class="form-check-label" for="socioPlus">Diventa socio Plus</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipoAbbonamento" class="form-label">Tipo di abbonamento</label>
+                        <select class="form-select" id="tipoAbbonamento" name="tipoAbbonamento">
+                            <option value="mensile">Mensile</option>
+                            <option value="annuale">Annuale</option>
+                            <option value="bimestrale">Bimestrale</option>
+                        </select>
+                    </div>
+                    <div id="socioDescription" style="display: none">
+                        <p>In questo modo potrai partecipare alle riunioni gratuitamente e avere diritto di voto.</p>
+                    </div>
+                    <div id="socioPlusDescription" style="display: none">
+                        <p>In questo modo potrai partecipare alle riunioni e avere diritto di voto. In più, avrai degli sconti durante l'anno.</p>
+                    </div>
                     <button type="submit" class="btn btn-primary" name="register">Registrazione</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container">
@@ -209,5 +232,83 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
+
+<div class="modal fade" id="registrationSuccessModal" tabindex="-1" aria-labelledby="registrationSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registrationSuccessModalLabel">Registrazione Effettuata</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>La registrazione è stata effettuata con successo!</p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    // Controlla se il messaggio di registrazione è stato impostato dal PHP
+    var registrationMessage = "<?php echo isset($registrationMessage) ? $registrationMessage : ''; ?>";
+    var indexURL = "<?php echo isset($indexURL) ? $indexURL : ''; ?>";
+    
+    // Mostra il popup se il messaggio è presente
+    if (registrationMessage !== '') {
+        // Mostra il popup di avviso con il messaggio di registrazione
+        alert(registrationMessage);
+        
+        // Reindirizza l'utente alla pagina index.html dopo 3 secondi
+        setTimeout(function() {
+            window.location.href = indexURL;
+        }, 3000);
+    }
+</script>
+
+
+
+<script>
+    function handleSocioCheckbox() {
+        var socioCheckbox = document.getElementById("socio");
+        var socioPlusCheckbox = document.getElementById("socioPlus");
+        var tipoAbbonamentoSelect = document.getElementById("tipoAbbonamento");
+        var socioDescription = document.getElementById("socioDescription");
+
+        if (socioCheckbox.checked) {
+            socioPlusCheckbox.checked = false;
+            socioPlusCheckbox.disabled = true;
+            tipoAbbonamentoSelect.disabled = true;
+            socioDescription.style.display = "block";
+        } else {
+            socioPlusCheckbox.disabled = false;
+            tipoAbbonamentoSelect.disabled = false;
+            socioDescription.style.display = "none";
+        }
+    }
+    function handleSocioPlusCheckbox() {
+        var socioCheckbox = document.getElementById("socio");
+        var socioPlusCheckbox = document.getElementById("socioPlus");
+        var tipoAbbonamentoSelect = document.getElementById("tipoAbbonamento");
+        var socioPlusDescription = document.getElementById("socioPlusDescription");
+
+        if (socioPlusCheckbox.checked) {
+            socioCheckbox.checked = false;
+            socioCheckbox.disabled = true;
+            socioPlusDescription.style.display = "block";
+        } else {
+            socioCheckbox.disabled = false;
+            tipoAbbonamentoSelect.disabled = false;
+            socioPlusDescription.style.display = "none";
+        }
+    }
+</script>
+
+<!-- <script>
+    // Dopo aver completato la registrazione con successo, mostra il popup
+    // Assicurati di inserire questo script nella parte appropriata del tuo codice, dopo aver gestito la registrazione effettiva.
+    $('#registrationSuccessModal').modal('show');
+</script> -->
+
