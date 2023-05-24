@@ -13,8 +13,6 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/styles.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-    <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
 </head>
 <body>
 <!-- Navigation -->
@@ -28,22 +26,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">All Products</a></li>
-                        <li><hr class="dropdown-divider"/></li>
-                        <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                    </ul>
-                </li>
             </ul>
-            <form class="d-flex">
-                <button class="btn btn-outline-dark" type="submit">
-                    <i class="bi-cart-fill me-1"></i>
-                    Cart
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                </button>
-            </form>
             <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
             <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#signUpModal">Registrazione</button>
         </div>
@@ -93,7 +76,7 @@
                     </div>
                     <!-- Product actions -->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Visualizza impianto</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
                     </div>
                 </div>
             </div>
@@ -110,7 +93,7 @@
                     </div>
                     <!-- Product actions -->
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Visualizza impianto</a></div>
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
                     </div>
                 </div>
             </div>
@@ -127,7 +110,7 @@
                         </div>
                         <!-- Product actions-->
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="#">Visualizza impianto</a></div>
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
                         </div>
                 </div>
             </div>
@@ -145,7 +128,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form di login -->
-                <form method="post" action="login.php">
+                <form id="login-form" method="post" action="login.php">
                     <div class="mb-3">
                         <label for="username" class="form-label">Username</label>
                         <input type="username" class="form-control" id="username" placeholder="username" name="username">
@@ -154,12 +137,14 @@
                         <label for="password" class="form-label">Password</label>
                         <input type="password" class="form-control" id="password" placeholder="password" name="password">
                     </div>
+                    <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
                     <button type="submit" class="btn btn-primary" name="login">Login</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 <!-- Modal -->
 <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -200,12 +185,12 @@
                         <label class="form-check-label" for="socio">Diventa socio</label>
                     </div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="socioPlus" name="socioPlus" onclick="handleSocioPlusCheckbox()">
-                        <label class="form-check-label" for="socioPlus">Diventa socio Plus</label>
+                        <input type="checkbox" class="form-check-input" id="socio_plus" name="socio_plus" onclick="handleSocioPlusCheckbox()">
+                        <label class="form-check-label" for="socio_plus">Diventa socio Plus</label>
                     </div>
                     <div class="mb-3">
-                        <label for="tipoAbbonamento" class="form-label">Tipo di abbonamento</label>
-                        <select class="form-select" id="tipoAbbonamento" name="tipoAbbonamento">
+                        <label for="tipo_abbonamento" class="form-label">Tipo di abbonamento</label>
+                        <select class="form-select" id="tipo_abbonamento" name="tipo_abbonamento">
                             <option value="mensile">Mensile</option>
                             <option value="annuale">Annuale</option>
                             <option value="bimestrale">Bimestrale</option>
@@ -223,38 +208,21 @@
         </div>
     </div>
 </div>
+
 <!-- Footer-->
 <footer class="py-5 bg-dark">
     <div class="container">
         <p class="m-0 text-center text-white"><!--footer--></p>
     </div>
 </footer>  
-<!-- Bootstrap core JS-->
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
 <script src="js/scripts.js"></script>
-<!-- SweetAlert2 JS -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.all.min.js"></script>
-<script>
-  window.addEventListener("DOMContentLoaded", function() {
-    // Mostra il popup dopo il caricamento della pagina
-    Swal.fire({
-      title: "Registrazione con successo!",
-      icon: "success",
-      confirmButtonText: "OK"
-    });
-  });
-</script>
-
-</body>
-</html>
-
-
 <script>
     function handleSocioCheckbox() {
         var socioCheckbox = document.getElementById("socio");
-        var socioPlusCheckbox = document.getElementById("socioPlus");
-        var tipoAbbonamentoSelect = document.getElementById("tipoAbbonamento");
+        var socioPlusCheckbox = document.getElementById("socio_plus");
+        var tipoAbbonamentoSelect = document.getElementById("tipo_abbonamento");
         var socioDescription = document.getElementById("socioDescription");
 
         if (socioCheckbox.checked) {
@@ -268,10 +236,11 @@
             socioDescription.style.display = "none";
         }
     }
+
     function handleSocioPlusCheckbox() {
         var socioCheckbox = document.getElementById("socio");
-        var socioPlusCheckbox = document.getElementById("socioPlus");
-        var tipoAbbonamentoSelect = document.getElementById("tipoAbbonamento");
+        var socioPlusCheckbox = document.getElementById("socio_plus");
+        var tipoAbbonamentoSelect = document.getElementById("tipo_abbonamento");
         var socioPlusDescription = document.getElementById("socioPlusDescription");
 
         if (socioPlusCheckbox.checked) {
@@ -284,4 +253,42 @@
             socioPlusDescription.style.display = "none";
         }
     }
+
+    function showError(message) {
+        var errorMessage = document.getElementById('error-message');
+        errorMessage.innerText = message;
+    }
+
+   
+
+    /* function validateLogin() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        
+        if (username.trim() === '' || password.trim() === '') {
+            showError('Inserisci username e password');
+            return false;
+        }
+
+        var validUsername = "username";
+        var validPassword = "password";
+
+        if (username !== validUsername || password !== validPassword) {
+            showError('Username o password errati');
+            return false;
+        }
+       
+        return true;
+    } */
+    
+    // Aggiungi un gestore di eventi per l'invio del modulo di login
+    /* document.querySelector('#loginModal form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        if (validateLogin()) {
+            this.submit();
+        }
+    });  */
 </script>
+</body>
+</html>

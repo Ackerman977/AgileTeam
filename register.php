@@ -1,4 +1,5 @@
 <?php
+
 require_once('connection.php');
 
 if (isset($_POST['register'])) {
@@ -9,8 +10,9 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'] ?? '';
     $email = $_POST['email'] ?? '';
     $socio = isset($_POST['socio']) ? 1 : 0;
-    $socioPlus = isset($_POST['socioPlus']) ? 1 : 0;
-    $tipoAbbonamento = $_POST['tipoAbbonamento'] ?? '';
+    $socioPlus = isset($_POST['socio_plus']) ? 1 : 0;
+    $tipoAbbonamento = $_POST['tipo_abbonamento'] ?? '';
+
 
     $query = "SELECT id FROM utenti WHERE nome = :nome OR email = :email OR username = :username";
     $check = $pdo->prepare($query);
@@ -52,20 +54,11 @@ if (isset($_POST['register'])) {
             $registerUser->bindParam(':email', $email, PDO::PARAM_STR);
             $registerUser->bindParam(':socio', $socio, PDO::PARAM_INT);
             $registerUser->bindParam(':socio_plus', $socioPlus, PDO::PARAM_INT);
-            $registerUser->bindParam(':tipo_abbonamento', $tipoAbbonamento, PDO::PARAM_STR);
+            $registerUser->bindParam(':tipo_abbonamento', $tipoAbbonamento, PDO::PARAM_STR);            
             $registerUser->execute();
-
-            if ($registerUser->rowCount() > 0) {
-                // Reindirizza alla pagina index.php
-                header("Location: index.html");
-                exit;
-            } else {
-                $msg = 'Problems inserting data: %s';
-            }
         }
+    header("Location: indexlog.html");
+    exit();
     }
-    if (isset($msg)) {
-        echo sprintf($msg, '<a href="index.html">Go back</a>');
-    } 
 }
 ?>
