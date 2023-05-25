@@ -24,3 +24,4 @@ try {
     // Gestione dell'eccezione in caso di errore di connessione al database
     exit("Impossibile connettersi al database: " . $e->getMessage());
 }
+?>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Privata</title>
+
+     <!-- Core theme CSS (includes Bootstrap)-->
+     <link href="css/styles.css" rel="stylesheet" />
+     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+
+<body>
+    <h1>Area Privata - Wallet Personale</h1>
+
+    <h2>Informazioni Utente</h2>
+    <p>Benvenuto nell'area privata, [Nome Utente]!</p>
+    <p>Qui puoi gestire il tuo wallet personale e le tue transazioni.</p>
+
+    <h2>Wallet Personale</h2>
+    <p>Il tuo saldo attuale è: [Saldo]</p>
+
+    <h3>Effettua una Transazione</h3>
+    <form method="post" action="process_transaction.php">
+        <label for="destinatario">Destinatario:</label>
+        <input type="text" id="destinatario" name="destinatario" required>
+
+        <label for="importo">Importo:</label>
+        <input type="number" id="importo" name="importo" required>
+
+        <button type="submit">Invia</button>
+    </form>
+
+    <h3>Storico Transazioni</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Destinatario</th>
+                <th>Importo</th>
+                <th>Stato</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop attraverso le transazioni e popolare la tabella -->
+            <tr>
+                <td>[Data]</td>
+                <td>[Destinatario]</td>
+                <td>[Importo]</td>
+                <td>[Stato]</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
