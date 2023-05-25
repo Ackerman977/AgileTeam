@@ -60,9 +60,22 @@ if (isset($_POST['register'])) {
             $registerUser->bindParam(':tipo_abbonamento', $tipo_abbonamento, PDO::PARAM_STR);            
             $registerUser->execute();
 
-            // Reindirizza all'index dopo la registrazione
-            header("Location: indexlog.html");
-            exit();
+            // Mostra il popup di registrazione avvenuta con successo
+            echo '
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script>
+                window.onload = function() {
+                    swal({
+                        title: "Registrazione avvenuta con successo!",
+                        icon: "success",
+                        button: "OK"
+                    }).then(function() {
+                        window.location.href = "indexlog.html";
+                    });
+                };
+            </script>
+            ';
+            
         }
     }
 }
