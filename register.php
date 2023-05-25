@@ -1,5 +1,4 @@
 <?php
-
 require_once('connection.php');
 
 if (isset($_POST['register'])) {
@@ -10,10 +9,10 @@ if (isset($_POST['register'])) {
     $password = $_POST['password'] ?? '';
     $email = $_POST['email'] ?? '';
     $socio = isset($_POST['socio']) ? 1 : 0;
-    $socioPlus = isset($_POST['socio_plus']) ? 1 : 0;
-    $tipoAbbonamento = $_POST['tipo_abbonamento'] ?? '';
+    $socio_plus = isset($_POST['socio_plus']) ? 1 : 0;
+    $tipo_abbonamento = $_POST['tipo_abbonamento'] ?? '';
 
-
+    // Verifica se esistono già utenti con lo stesso nome, email o username
     $query = "SELECT id FROM utenti WHERE nome = :nome OR email = :email OR username = :username";
     $check = $pdo->prepare($query);
     $check->bindParam(':nome', $nome, PDO::PARAM_STR);
@@ -23,28 +22,32 @@ if (isset($_POST['register'])) {
     $existingUsers = $check->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($existingUsers) > 0) {
-        $msg = 'Name, email, or username already in use: %s';
+        $msg = 'Name, email, or username already in use.';
     } elseif (trim($nome) === '') {
-        $msg = 'The "Nome" field is required: %s';
+        $msg = 'The "Nome" field is required.';
     } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $msg = 'Please enter a valid email address: %s';
+        $msg = 'Please enter a valid email address.';
     } elseif (!preg_match("/^[a-z\d_]{3,20}$/i", $username)) {
-        $msg = 'The username is not valid. Only alphanumeric characters and underscore are allowed. Minimum length: 3 characters. Maximum length: 20 characters: %s';
+        $msg = 'The username is not valid. Only alphanumeric characters and underscore are allowed. Minimum length: 3 characters. Maximum length: 20 characters.';
     } elseif (strlen($password) < 8 || strlen($password) > 20) {
-        $msg = 'Password length should be between 8 and 20 characters: %s';
+        $msg = 'Password length should be between 8 and 20 characters.';
     } else {
-        $query = "SELECT id FROM utenti WHERE email = :email";
+        // Verifica se l'email è già in uso
+        $query = "SELECT email FROM agile_db.utenti WHERE email = :email";
         $checkEmail = $pdo->prepare($query);
         $checkEmail->bindParam(':email', $email, PDO::PARAM_STR);
         $checkEmail->execute();
         $existingEmail = $checkEmail->fetchAll(PDO::FETCH_ASSOC);
 
         if (count($existingEmail) > 0) {
-            $msg = 'The email is already in use: %s';
+            $msg = 'The email is already in use.';
         } else {
+            // Crea l'hash della password
             $password_hash = password_hash($password, PASSWORD_BCRYPT);
 
-            $query = "INSERT INTO utenti (nome, cognome, numero_telefono, username, password, email, socio, socio_plus, tipo_abbonamento) VALUES (:nome, :cognome, :numero_telefono, :username, :password, :email, :socio, :socio_plus, :tipo_abbonamento)";
+            // Inserisci i dati dell'utente nel database
+            $query = "INSERT INTO agile_db.utenti(nome, cognome, numero_telefono, username, password, email, socio, socio_plus, tipo_abbonamento) 
+                      VALUES (:nome, :cognome, :numero_telefono, :username, :password, :email, :socio, :socio_plus, :tipo_abbonamento)";
             $registerUser = $pdo->prepare($query);
             $registerUser->bindParam(':nome', $nome, PDO::PARAM_STR);
             $registerUser->bindParam(':cognome', $cognome, PDO::PARAM_STR);
@@ -53,12 +56,14 @@ if (isset($_POST['register'])) {
             $registerUser->bindParam(':password', $password_hash, PDO::PARAM_STR);
             $registerUser->bindParam(':email', $email, PDO::PARAM_STR);
             $registerUser->bindParam(':socio', $socio, PDO::PARAM_INT);
-            $registerUser->bindParam(':socio_plus', $socioPlus, PDO::PARAM_INT);
-            $registerUser->bindParam(':tipo_abbonamento', $tipoAbbonamento, PDO::PARAM_STR);            
+            $registerUser->bindParam(':socio_plus', $socio_plus, PDO::PARAM_INT);
+            $registerUser->bindParam(':tipo_abbonamento', $tipo_abbonamento, PDO::PARAM_STR);            
             $registerUser->execute();
+
+            // Reindirizza all'index dopo la registrazione
+            header("Location: indexlog.html");
+            exit();
         }
-    header("Location: indexlog.html");
-    exit();
     }
 }
 ?>
