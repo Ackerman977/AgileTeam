@@ -1,57 +1,199 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Area Privata</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Initech</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.5/dist/sweetalert2.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-     <!-- Core theme CSS (includes Bootstrap)-->
-     <link href="css/styles.css" rel="stylesheet" />
-     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+        .navbar {
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .nav-link {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .btn {
+            font-weight: bold;
+        }
+
+        .header {
+            background-color: #343a40;
+            padding: 50px;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #fff;
+            font-size: 48px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            margin: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        p {
+            color: #777;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 200px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button[type="submit"] {
+            padding: 8px 20px;
+            background-color: #fff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Area Privata - Wallet Personale</h1>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="#!">Welcome to Initech</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="indexlog.html">Home</a></li>
+                </ul>
+            </div>
+            <div class="text-center"><a class="btn btn-outline-dark ms-3" class="btn btn-outline-dark mt-auto" href="index.html">Logout</a></div>
+        </div>
+    </nav>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1 class="display-4">Initech</h1>
+            <p class="lead">Benvenuto nell'area privata di Initech <br> Qui puoi gestire il tuo wallet personale e le tue transazioni</p>        </div>
+    </header>
 
-    <h2>Informazioni Utente</h2>
-    <p>Benvenuto nell'area privata, [Nome Utente]!</p>
-    <p>Qui puoi gestire il tuo wallet personale e le tue transazioni.</p>
+    <div class="container">
+        <div class="my-4">
+            <h2>Wallet Personale</h2>
+            <p class="lead">Il tuo saldo attuale è: [Saldo]</p>
+        </div>
+    
+        <div class="my-4">
+            <h3>Effettua una Transazione</h3>
+            <form method="post" action="process_transaction.php">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="destinatario" class="form-label">Destinatario:</label>
+                        <input type="text" class="form-control" id="destinatario" name="destinatario" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="importo" class="form-label">Importo:</label>
+                        <input type="number" class="form-control" id="importo" name="importo" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Invia</button>
+            </form>
+        </div>
+    
+        <div class="my-4">
+            <h3>Storico Transazioni</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Destinatario</th>
+                        <th>Importo</th>
+                        <th>Stato</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop attraverso le transazioni e popolare la tabella -->
+                    <tr>
+                        <td>[Data]</td>
+                        <td>[Destinatario]</td>
+                        <td>[Importo]</td>
+                        <td>[Stato]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-    <h2>Wallet Personale</h2>
-    <p>Il tuo saldo attuale è: [Saldo]</p>
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white"><!--footer--></p>
+    </div>
+</footer>  
 
-    <h3>Effettua una Transazione</h3>
-    <form method="post" action="process_transaction.php">
-        <label for="destinatario">Destinatario:</label>
-        <input type="text" id="destinatario" name="destinatario" required>
-
-        <label for="importo">Importo:</label>
-        <input type="number" id="importo" name="importo" required>
-
-        <button type="submit">Invia</button>
-    </form>
-
-    <h3>Storico Transazioni</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Destinatario</th>
-                <th>Importo</th>
-                <th>Stato</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Loop attraverso le transazioni e popolare la tabella -->
-            <tr>
-                <td>[Data]</td>
-                <td>[Destinatario]</td>
-                <td>[Importo]</td>
-                <td>[Stato]</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
 </body>
-
 </html>
