@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Initech</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#!">Welcome to Initech</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
+            </ul>
+            <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+            <button class="btn btn-outline-dark ms-3" data-bs-toggle="modal" data-bs-target="#signUpModal">Registrazione</button>
+        </div>
+    </div>
+</nav>
+<!-- Header -->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">Initech</h1>
+            <p class="lead fw-normal text-white-50 mb-0"><!--With this shop homepage template--></p>
+        </div>
+    </div>
+</header>
+
+<!-- Section -->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image -->
+                    <img class="card-img-top" src="img\calcio.jpg" alt="..." />
+                    <!-- Product details -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name -->
+                            <h5 class="fw-bolder">Impianto sportivo Moravia</h5>
+                        </div>
+                    </div>
+                    <!-- Product actions -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image -->
+                    <img class="card-img-top" src="img\padel.jpg" alt="..." />
+                    <!-- Product details -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name -->
+                            <h5 class="fw-bolder">Impianto sportivo Tennis Team Vianello</h5>
+                        </div>
+                    </div>
+                    <!-- Product actions -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Product image -->
+                    <img class="card-img-top" src="img\basket.jpeg" alt="..." />
+                    <!-- Product details -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name -->
+                            <h5 class="fw-bolder">Impianto sportivo Gagliardi</h5>
+                        </div>
+                    </div>
+                    <!-- Product actions -->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col mb-5">
+                <div class="card h-100">
+                        <!-- Product image-->
+                        <img class="card-img-top" src="img\piscina.jpg" alt="..." />
+                        <!-- Product details-->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product name-->
+                                <h5 class="fw-bolder">Piscina Comunale</h5>
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="impianto.html">Visualizza impianto</a></div>
+                        </div>
+                </div>
+            </div>
+                <div class="col mb-5">
+                    <div class="card h-100"></div>
+                </div>
+</section> 
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form di login -->
+                <form id="login-form" method="POST" action="login.php">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="username" class="form-control" id="username" placeholder="username" name="username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="password" name="password">
+                    </div>
+                    <div id="error-message" style="color: red; margin-bottom: 10px;"></div>
+                    <button type="submit" class="btn btn-primary" name="login">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="signUpModalLabel">Registrazione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form di Sign Up -->
+                <form method="POST" action="register.php">
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cognome" class="form-label">Cognome</label>
+                        <input type="text" class="form-control" id="cognome" name="cognome" placeholder="Cognome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numero_telefono" class="form-label">Numero di telefono</label>
+                        <input type="tel" class="form-control" id="numero_telefono" name="numero_telefono" placeholder="Numero di telefono">
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="socio" name="socio" onclick="handleSocioCheckbox()">
+                        <label class="form-check-label" for="socio">Diventa socio</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="socio_plus" name="socio_plus" onclick="handleSocioPlusCheckbox()">
+                        <label class="form-check-label" for="socio_plus">Diventa socio Plus</label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipo_abbonamento" class="form-label">Tipo di abbonamento</label>
+                        <select class="form-select" id="tipo_abbonamento" name="tipo_abbonamento">
+                            <option value="mensile">Mensile</option>
+                            <option value="annuale">Annuale</option>
+                            <option value="bimestrale">Bimestrale</option>
+                        </select>
+                    </div>
+                    <div id="socioDescription" style="display: none">
+                        <p>In questo modo potrai partecipare alle riunioni gratuitamente e avere diritto di voto.</p>
+                    </div>
+                    <div id="socioPlusDescription" style="display: none">
+                        <p>In questo modo potrai partecipare alle riunioni e avere diritto di voto. In più, avrai degli sconti durante l'anno.</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="register">Registrazione</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer-->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white"><!--footer--></p>
+    </div>
+</footer>  
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scripts.js"></script>
+<script>
+    function handleSocioCheckbox() {
+        var socioCheckbox = document.getElementById("socio");
+        var socioPlusCheckbox = document.getElementById("socio_plus");
+        var tipoAbbonamentoSelect = document.getElementById("tipo_abbonamento");
+        var socioDescription = document.getElementById("socioDescription");
+
+        if (socioCheckbox.checked) {
+            socioPlusCheckbox.checked = false;
+            socioPlusCheckbox.disabled = true;
+            tipoAbbonamentoSelect.disabled = true;
+            socioDescription.style.display = "block";
+        } else {
+            socioPlusCheckbox.disabled = false;
+            tipoAbbonamentoSelect.disabled = false;
+            socioDescription.style.display = "none";
+        }
+    }
+
+    function handleSocioPlusCheckbox() {
+        var socioCheckbox = document.getElementById("socio");
+        var socioPlusCheckbox = document.getElementById("socio_plus");
+        var tipoAbbonamentoSelect = document.getElementById("tipo_abbonamento");
+        var socioPlusDescription = document.getElementById("socioPlusDescription");
+
+        if (socioPlusCheckbox.checked) {
+            socioCheckbox.checked = false;
+            socioCheckbox.disabled = true;
+            socioPlusDescription.style.display = "block";
+        } else {
+            socioCheckbox.disabled = false;
+            tipoAbbonamentoSelect.disabled = false;
+            socioPlusDescription.style.display = "none";
+        }
+    }
+
+    function showError(message) {
+        var errorMessage = document.getElementById('error-message');
+        errorMessage.innerText = message;
+    }
+
+   
+
+    /* function validateLogin() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        
+        if (username.trim() === '' || password.trim() === '') {
+            showError('Inserisci username e password');
+            return false;
+        }
+
+        var validUsername = "username";
+        var validPassword = "password";
+
+        if (username !== validUsername || password !== validPassword) {
+            showError('Username o password errati');
+            return false;
+        }
+       
+        return true;
+    } */
+    
+    // Aggiungi un gestore di eventi per l'invio del modulo di login
+    /* document.querySelector('#loginModal form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        if (validateLogin()) {
+            this.submit();
+        }
+    });  */
+</script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caratteristiche Impianto Sportivo</title>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .facility-info {
+            margin-bottom: 20px;
+        }
+
+        .facility-info p {
+            margin: 10px 0;
+        }
+
+        .sport-list {
+            margin-bottom: 20px;
+        }
+
+        .opening-hours {
+            margin-bottom: 20px;
+        }
+
+        .opening-hours table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .opening-hours th,
+        .opening-hours td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        .reservation-button {
+            text-align: center;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 20% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Caratteristiche Impianto Sportivo</h1>
+
+    <div class="facility-info">
+        <h2>Informazioni Impianto Sportivo</h2>
+        <p>Nome: [Nome Impianto]</p>
+        <p>Indirizzo: [Indirizzo Impianto]</p>
+        <p>Telefono: [Telefono Impianto]</p>
+    </div>
+
+    <div class="sport-list">
+        <h2>Sport Disponibili</h2>
+        <ul>
+            <li>[Sport 1]</li>
+            <li>[Sport 2]</li>
+            <li>[Sport 3]</li>
+            <!-- Aggiungi altri sport disponibili -->
+        </ul>
+    </div>
+
+    <div class="opening-hours">
+        <h2>Orari di Apertura</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Giorno</th>
+                    <th>Ora apertura</th>
+                    <th>Ora chiusura</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lunedi</td>
+                    <td>09:00</td>
+                    <td>18:00</td>
+                </tr>
+                <tr>
+                    <td>Martedi</td>
+                    <td>09:00</td>
+                    <td>18:00</td>
+                </tr>
+                <!-- Aggiungi altri giorni e relativi orari -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="reservation-button">
+        <button onclick="openModal()">Prenota Lezione</button>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Prenotazione Lezione</h2>
+            <form>
+                <div class="form-group">
+                    <label for="data">Data:</label>
+                    <input type="date" id="data" name="data" required>
+                </div>
+                <div class="form-group">
+                    <label for="orario">Orario:</label>
+                    <input type="time" id="orario" name="orario" required>
+                </div>
+                <div class="form-group">
+                    <label for="sport">Sport:</label>
+                    <select id="sport" name="sport" required>
+                        <option value="">Seleziona uno sport</option>
+                        <option value="[Sport 1]">[Sport 1]</option>
+                        <option value="[Sport 2]">[Sport 2]</option>
+                        <option value="[Sport 3]">[Sport 3]</option>
+                        <!-- Aggiungi altri sport disponibili -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="partecipanti">Numero Partecipanti:</label>
+                    <input type="number" id="partecipanti" name="partecipanti" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="durata">Durata Prenotazione (in ore):</label>
+                    <input type="number" id="durata" name="durata" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="maestro">Maestro:</label>
+                    <select id="maestro" name="maestro" required>
+                        <option value="">Seleziona un maestro</option>
+                        <option value="[Maestro 1]">[Maestro 1]</option>
+                        <option value="[Maestro 2]">[Maestro 2]</option>
+                        <option value="[Maestro 3]">[Maestro 3]</option>
+                        <!-- Aggiungi altri maestri disponibili -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="posti-disponibili">Posti Disponibili:</label>
+                    <input type="number" id="posti-disponibili" name="posti-disponibili" min="1" required>
+                </div>
+                <button type="submit">Prenota</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Apri la finestra modale
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        // Chiudi la finestra modale
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+    </script>
+</body>
+
+</html>
