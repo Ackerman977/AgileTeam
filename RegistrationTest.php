@@ -1,7 +1,7 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-class Test extends TestCase
+class RegistrationTest extends TestCase
 {
     private $pdo;
 
