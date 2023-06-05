@@ -1,19 +1,19 @@
 <?php return array(
     'root' => array(
-        'name' => '__root__',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'name' => 'ackerman977/agileteam',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '3d0a37641fccc0b6675b15261ffd71bcc46b6de7',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        '__root__' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+        'ackerman977/agileteam' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '3d0a37641fccc0b6675b15261ffd71bcc46b6de7',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -101,9 +101,9 @@
             'dev_requirement' => true,
         ),
         'phpunit/phpunit' => array(
-            'pretty_version' => '10.1.3',
-            'version' => '10.1.3.0',
-            'reference' => '2379ebafc1737e71cdc84f402acb6b7f04198b9d',
+            'pretty_version' => '10.2.1',
+            'version' => '10.2.1.0',
+            'reference' => '599b33294350e8f51163119d5670512f98b0490d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
