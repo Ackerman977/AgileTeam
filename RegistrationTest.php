@@ -37,24 +37,48 @@ class RegistrationTest extends TestCase
         $this->assertEquals('The "Nome" field is required.', $result);
     }
 
+    public function testValidName()
+    {
+        $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'testPassword123', 'test@test.com', 0, 0, 'testSubscriptionType');
+        $this->assertNotEquals('The "Nome" field is required.', $result);
+    }
+
     public function testInvalidEmail()
     {
         $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'testPassword123', 'invalidEmail', 0, 0, 'testSubscriptionType');
         $this->assertEquals('Please enter a valid email address.', $result);
     }
 
-    public function testInvalidUsername()
+    public function testValidEmail()
     {
-    $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'test/Username', 'testPassword123', 'test@test.com', 0, 0, 'testSubscriptionType');
-    $expectedMessage = 'The username is not valid. Only alphanumeric characters and underscore are allowed. Minimum length: 3 characters. Maximum length: 20 characters.';
-    $this->assertEquals($expectedMessage, $result);
+        $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'testPassword123', 'test@test.com', 0, 0, 'testSubscriptionType');
+        $this->assertNotEquals('Please enter a valid email address.', $result);
     }
 
+    public function testInvalidUsername()
+    {
+        $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'test/Username', 'testPassword123', 'test@test.com', 0, 0, 'testSubscriptionType');
+        $expectedMessage = 'The username is not valid. Only alphanumeric characters and underscore are allowed. Minimum length: 3 characters. Maximum length: 20 characters.';
+        $this->assertEquals($expectedMessage, $result);
+    }
+
+    public function testValidUsername()
+    {
+        $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'testPassword123', 'test@test.com', 0, 0, 'testSubscriptionType');
+        $expectedMessage = 'The username is not valid. Only alphanumeric characters and underscore are allowed. Minimum length: 3 characters. Maximum length: 20 characters.';
+        $this->assertNotEquals($expectedMessage, $result);
+    }
 
     public function testInvalidPassword()
     {
         $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'test', 'test@test.com', 0, 0, 'testSubscriptionType');
         $this->assertEquals('Password length should be between 8 and 20 characters.', $result);
+    }
+
+    public function testValidPassword()
+    {
+        $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'testPassword123', 'test@test.com', 0, 0, 'testSubscriptionType');
+        $this->assertNotEquals('Password length should be between 8 and 20 characters.', $result);
     }
 
     public function testDuplicateEmail()
@@ -71,6 +95,6 @@ class RegistrationTest extends TestCase
     public function testSuccessfulRegistration()
     {
         $result = registerUser($this->pdo, 'testName', 'testSurname', 'testPhoneNumber', 'testUsername', 'testPassword123', 'testporcod@test.com', 0, 0, 'testSubscriptionType');
-        $this->assertEquals('', $result);  // Modifica: Aggiorna l'asserzione per verificare la stringa vuota come valore atteso
+        $this->assertEquals('', $result);
     }
 }

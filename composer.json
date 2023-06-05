@@ -1,5 +1,8 @@
 {
     "require-dev": {
         "phpunit/phpunit": "^10.1"
+    },
+    "scripts": {
+        "test": "phpunit path/to/LoginTest.php && phpunit path/to/RegistrationTest.php"
     }
 }
